@@ -1,46 +1,93 @@
 # Wave Sim Stabilizer
 
-A nonlinear wave simulation toolkit with built-in **threshold-based suppression**. Prevents chaotic blow-up in wave equations like the nonlinear Schrödinger equation (NLSE).
+A lightweight nonlinear wave simulation tool for the nonlinear Schrödinger equation (NLSE), featuring a threshold-based suppression mechanism to improve stability in high-gradient wave systems.
 
-## Features
-- ✅ Stabilizes rogue waves and solitons
-- ✅ One-line toggle for suppression
-- ✅ Built-in visualization
-- ✅ Zero-tuning threshold model
+This method is designed for users modeling nonlinear dynamics where standard simulations may exhibit blow-up or unstable evolution. The suppression term is optional and configurable.
 
-## Usage
+---
+
+## 🔧 Features
+
+- Simulates 1D NLSE-type systems using a split-step Fourier method
+- Optional suppression mechanism activates beyond a user-defined gradient threshold
+- Tracks key metrics: peak amplitude, variance, suppression charge
+- Simple API for running custom initial waveforms
+- Includes plotting tools and analysis-ready outputs
+
+---
+
+## 📦 Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Basic Usage
+
+```python
 from wave_sim_stabilizer import WaveSimStabilizer
 
 sim = WaveSimStabilizer()
 history, _ = sim.simulate(apply_suppression=True)
 sim.plot_history(history, title="With Suppression")
+```
 
-## or use the demo notebook:
+Or run the interactive notebook:
+
+```bash
 jupyter notebook demo.ipynb
-
-## Who It's For?
-Who It's For
-
-Researchers modeling nonlinear waves (optics, BEC, plasmas)
-Physics & engineering students
-Sim tool devs who want stable dynamics
+```
 
 ---
 
-### ✅ **Step 4: Write the Demo Notebook**
+## 📘 Test Case: Rogue Wave Stability
 
-Create `demo.ipynb` and add a simple test case:
-```python
-from wave_sim_stabilizer import WaveSimStabilizer
+Run `rogue_wave_test.py` to compare suppression ON vs OFF under a high-energy initial condition:
 
-sim = WaveSimStabilizer()
-history_with, _ = sim.simulate(apply_suppression=True)
-sim.plot_history(history_with, title="With Suppression")
-
-history_without, _ = sim.simulate(apply_suppression=False)
-sim.plot_history(history_without, title="Without Suppression")
-
-## Installation
 ```bash
-pip install -r requirements.txt
+python rogue_wave_test.py
+```
 
+This script outputs:
+- Peak wave intensity over time
+- Variance of the field
+- Evolution of suppression charge \( Q \)
+
+---
+
+## 👤 Who Is This For?
+
+- Researchers modeling rogue waves, solitons, or BECs
+- Physics students exploring nonlinear PDE behavior
+- Developers building wave simulation tools or teaching materials
+
+---
+
+## 📂 Project Structure
+
+```
+wave-sim-stabilizer/
+├── wave_sim_stabilizer.py    # Core solver
+├── demo.ipynb                # Interactive walkthrough
+├── rogue_wave_test.py        # Full comparison test
+├── README.md                 # You’re here
+├── requirements.txt          # Dependencies
+```
+
+---
+
+## 🧠 Notes
+
+- This implementation is in 1D and intended for exploratory or educational use.
+- Suppression parameters (threshold, strength, smoothness) can be adjusted as needed.
+- The code can be extended to higher dimensions or adapted to other nonlinear systems.
+
+---
+
+## 📫 Feedback / Collaboration
+
+Open to feedback, contributions, or collaborative extensions (2D, experimental comparisons, ML applications).
+
+```
